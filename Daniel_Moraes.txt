@@ -6,3 +6,5 @@ Olá, gosto de estudar idiomas e estudar programação. Atualmente focando em fr
 com HTML, CSS e JS, e para back-end JAVA. Sonho em me tornar um programador profissional
 e quero aprender a utilizar todas as linguagens. Sei que será difícil devido a quantidade
 delas... Porém, sei que com dedicação tudo é possível!
+
+Qual é seu hobbie preferido?
