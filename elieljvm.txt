@@ -5,3 +5,5 @@ Email: nascimentob.eliel@gmail.com
 gosto de tocar violão
 
 O que você mais gosta de estudar?
+
+java + react
