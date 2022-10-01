@@ -3,9 +3,7 @@ Daniel Moraes
 daniel.sp.ma@gmail.com
 
 Olá, gosto de estudar idiomas e estudar programação. Atualmente focando em front-end
-com HTML, CSS e JS, e para back-end JAVA. Sonho em me tornar um programador profissional
-e quero aprender a utilizar todas as linguagens. Sei que será difícil devido a quantidade
-delas... Porém, sei que com dedicação tudo é possível!
+com HTML, CSS e JS, e para back-end JAVA. Sonho em me tornar um programador profissional.
 
 Qual é seu hobbie preferido?
 
