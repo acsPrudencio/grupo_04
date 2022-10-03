@@ -1,5 +1,3 @@
-
-
 public class StringFormat {
     
     public static void main(String[] args){
@@ -11,10 +9,6 @@ public class StringFormat {
 
         //Usando o método format.
             
-            System.out.print(String.format("Meu nome é %s e ", nome));
-            System.out.println(String.format("meu salário é R$ %,.2f", salario));
-            
-
+            System.out.print(String.format("Meu nome é %s e meu salário é R$ %,.2f", nome, salario));         
     }
-
 }
