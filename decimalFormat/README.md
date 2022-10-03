@@ -27,3 +27,4 @@ Para entender como formatar, análise os caracteres e descrições dos símbolos
  - [JavaPoint] https://www.javatpoint.com/pt/m%C3%A9todo-em-java#:~:text=M%C3%A9todo%20de%20inst%C3%A2ncia&text=%C3%89%20um%20m%C3%A9todo%20n%C3%A3o%20est%C3%A1tico,de%20um%20m%C3%A9todo%20de%20inst%C3%A2ncia
  - [Canal Youtube -Loiane Groner] https://www.youtube.com/watch?v=ZT_gi07G9xE
 
+Link da apresentação - https://docs.google.com/presentation/d/1sxdtSoszqVZ0ynT98E0gkNM6e2NTiGUlTJJMocdgpHs/edit?usp=sharing
