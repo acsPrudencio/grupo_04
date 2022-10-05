@@ -1,5 +1,9 @@
 public class Agencia {
     public static void main(String[] args) {
-        System.out.println("Hello World!");
+        ContaCorrente cc = new ContaCorrente();
+
+        cc.abrirConta("55555", "0001", "Fulano");
+        cc.depositarUmValor(100);
+        cc.sacarUmValor(50);
     }
 }
