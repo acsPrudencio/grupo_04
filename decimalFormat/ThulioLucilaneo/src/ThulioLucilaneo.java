@@ -3,7 +3,7 @@ import java.text.DecimalFormat;
 public class ThulioLucilaneo {
     public static void main(String[] args) {
 
-        //padrao utilizando - EN
+        //padrao utilizando - US
         String padrao1 = "###,###.##";
         DecimalFormat df = new DecimalFormat(padrao1);
         System.out.println("SAIDA PADRAO 1 = "+df.format(234567890.123));
