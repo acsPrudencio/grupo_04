@@ -1,33 +1,124 @@
-import java.time.LocalDate;
+import java.text.DecimalFormat;
+//import java.time.LocalDate;
 
 public class ContaCorrente {
 
-    String numeroDaConta;
-    String numeroDaAgencia;
-    String nomeDoCliente;
-    LocalDate dataDeNascimento;
-    double saldoDaConta;
+    private String numeroDaConta;
+    private String numeroDaAgencia;
+    private String nomeDoCliente;
+    //LocalDate dataDeNascimento;
+    private double saldoDaConta;
+    private boolean contaAberta;
+    String padraoMonetario = "R$###,##0.00";
 
-    void sacarUmValor(double valor){
+
+    DecimalFormat df = new DecimalFormat(padraoMonetario);
+
+
+    void sacarUmValor(double valor) {
        //TODO realizar saque
+       if(this.isContaAberta()) {
+            if(valor > getSaldoDaConta())
+                System.out.println("Não é possível sacar um valor maior do que o saldo da conta.");
+            else if(valor == 0)
+                System.out.println("Não é possível sacar "+df.format(valor));
+            else {
+                setSaldoDaConta(getSaldoDaConta() - valor);
+                System.out.println("Você sacou "+df.format(valor)+" da sua conta");
+            }
+        } else {
+            System.out.println("Não é possível sacar dinheiro de uma conta inexistente.");
+        }
     }
 
-    void transferirValorEntreContas(double valor, ContaCorrente conta){
+    void depositarUmValor(double valor) {
+        if(this.isContaAberta()) {
+            if(valor == 0) {
+                System.out.println("Não é possível sacar "+df.format(valor));
+            } else {
+                setSaldoDaConta(getSaldoDaConta() + valor);
+                System.out.println("Você depositou "+df.format(valor)+" em sua conta.");
+            }
+        } else {
+            System.out.println("Não é possível depositar dinheiro em uma conta inexistente.");
+        }
+    }
+
+    void abrirConta(String numeroDaConta, String numeroDaAgencia, String nomeDoCliente) {
+        if(this.isContaAberta()) {
+            setNumeroDaConta(numeroDaConta);
+            setNumeroDaAgencia(numeroDaAgencia);
+            setNomeDoCliente(nomeDoCliente);
+            setContaAberta(true);
+            System.out.println(getNomeDoCliente()+" a sua conta foi criada com sucesso.");
+        } else {
+            System.out.println("Sua conta já foi aberta.");
+        }
+    }
+
+    void transferirValorEntreContas(double valor, ContaCorrente conta) {
        //TODO realizar transferencia
     }
 
-    boolean cancelarConta(String motivoCancelamento){
-        //TODO realizar cancelamento da conta e retorna true se a operação foi realizada com sucesso e false se a operação não pode ser realizada.
-        return true;
+    void cancelarConta(String motivoCancelamento) {
+        if(this.isContaAberta())
+            System.out.println("Não há nenhuma conta aberta no momento.");
+        else {
+            setContaAberta(false);
+            System.out.println("Sua conta foi fechada com sucesso pelo motivo: "+motivoCancelamento);
+        }
     }
 
-    String consultarExtratoPorPeriodo(LocalDate dataInicio, LocalDate dataFim){
+    /*String consultarExtratoPorPeriodo(LocalDate dataInicio, LocalDate dataFim) {
        //TODO Consultar o extrato no periodo X e retorna o saldo da conta
         return "Extrato";
+    }*/
+
+    void consultarSaldo() {
+       //TODO Retorna o saldo da conta
+        System.out.println("Seu saldo atual é de "+df.format(getSaldoDaConta()));
     }
 
-    double consultarSaldo(){
-       //TODO Retorna o saldo da conta
-        return 0;
+
+
+    public double getSaldoDaConta() {
+        return saldoDaConta;
     }
+
+    public void setSaldoDaConta(double saldoDaConta) {
+        this.saldoDaConta = saldoDaConta;
+    }
+
+    public boolean isContaAberta() {
+        return contaAberta;
+    }
+
+    public void setContaAberta(boolean contaAberta) {
+        this.contaAberta = contaAberta;
+    }
+
+    public String getNumeroDaConta() {
+        return numeroDaConta;
+    }
+
+    public void setNumeroDaConta(String numeroDaConta) {
+        this.numeroDaConta = numeroDaConta;
+    }
+
+    public String getNumeroDaAgencia() {
+        return numeroDaAgencia;
+    }
+
+    public void setNumeroDaAgencia(String numeroDaAgencia) {
+        this.numeroDaAgencia = numeroDaAgencia;
+    }
+
+    public String getNomeDoCliente() {
+        return nomeDoCliente;
+    }
+
+    public void setNomeDoCliente(String nomeDoCliente) {
+        this.nomeDoCliente = nomeDoCliente;
+    }
+
 }
