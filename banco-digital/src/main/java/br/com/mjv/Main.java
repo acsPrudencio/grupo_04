@@ -18,10 +18,10 @@ public class Main {
         Conta poupancaFrancisco = new ContaPoupanca(Francisco);
 
 
-        correnteAntonio.depositar(-1);
+        correnteAntonio.depositar(50);
         poupancaJose.depositar(100);
 
-        correnteAntonio.sacar(150);
+        correnteAntonio.sacar(200);
         poupancaJose.sacar(1);
 
         Banco banco = new Banco();
