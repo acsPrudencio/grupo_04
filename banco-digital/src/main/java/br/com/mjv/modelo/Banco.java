@@ -1,13 +1,11 @@
 package br.com.mjv.modelo;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import br.com.mjv.modelo.validations.NaoEhPoupanca;
-import br.com.mjv.modelo.validations.SaldoInsuficiente;
-import br.com.mjv.modelo.validations.ValorDepositarInvalido;
+import br.com.mjv.modelo.validations.*;
 import lombok.Data;
-import br.com.mjv.modelo.validations.ContaInexistente;
 
 
 @Data
@@ -46,14 +44,33 @@ public class Banco {
     }
 
     public Conta pesquisarConta(Conta conta) throws ContaInexistente {
-        for (Conta c : contas) {
-            if (c.getNumero() == conta.getNumero()) {
-                return c;
+        try {
+            for (Conta c : contas) {
+                if (c.getNumero() == conta.getNumero()) {
+                    return c;
+                }
             }
+            throw new ContaInexistente(conta.getNumero());
+        }catch (ContaInexistente e){
+            System.out.println(e);
         }
-        throw new ContaInexistente(conta.getNumero());
+        return null;
     }
 
+    public String consultarExtrato(Conta conta, LocalDate ld1, LocalDate ld2) throws ContaInexistente, DataInvalida {
+        Conta c = null;
+        try{
+            if(ld1.isAfter(ld2)){
+                throw new DataInvalida(conta);
+            }
+
+            c = pesquisarConta(conta);
+            return c.consultarExtrato(ld1, ld2);
+        }catch (DataInvalida e){
+            System.out.println(e);
+        }
+       return "";
+    }
     public void rendeJuros(Conta conta, double t) throws ContaInexistente, NaoEhPoupanca {
         Conta c = null;
         c = pesquisarConta(conta);
