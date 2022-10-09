@@ -32,7 +32,7 @@ public abstract class Conta implements IConta {
             extrato = extrato + "Debito: R$ " + valor + " Saldo: R$ " + getSaldo() + "\n";
 
         } catch (SaldoInsuficiente e) {
-            throw new SaldoInsuficiente(numero, getSaldo());
+            new SaldoInsuficiente(numero, getSaldo());
         }
     }
 
@@ -45,11 +45,17 @@ public abstract class Conta implements IConta {
     }
 
     public void depositar(double valor) throws ValorDepositarInvalido {
-        if(valor <= 0) {
-            throw new ValorDepositarInvalido(valor);
+        try {
+            if (valor <= 0) {
+                throw new ValorDepositarInvalido();
+            }
+            saldo += valor;
+            extrato = extrato + "Credito: R$ " + valor + " Saldo: R$ " + getSaldo() + "\n";
+        }catch (ValorDepositarInvalido e){
+            System.out.println(e);
+            System.exit(0);
+
         }
-        saldo += valor;
-        extrato = extrato + "Credito: R$ " + valor + " Saldo: R$ " + getSaldo() + "\n";
     }
 
     public void transferir(double valor, IConta contaDestino) throws SaldoInsuficiente, ValorDepositarInvalido {
