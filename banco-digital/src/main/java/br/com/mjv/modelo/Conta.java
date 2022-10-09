@@ -53,7 +53,6 @@ public abstract class Conta implements IConta {
             extrato = extrato + "Credito: R$ " + valor + " Saldo: R$ " + getSaldo() + "\n";
         }catch (ValorDepositarInvalido e){
             System.out.println(e);
-            System.exit(0);
 
         }
     }
