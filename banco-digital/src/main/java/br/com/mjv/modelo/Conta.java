@@ -2,6 +2,7 @@ package br.com.mjv.modelo;
 
 import br.com.mjv.interfaces.IConta;
 import br.com.mjv.modelo.validations.SaldoInsuficiente;
+import br.com.mjv.modelo.validations.ValorDepositarInvalido;
 import lombok.Data;
 
 @Data
@@ -43,12 +44,15 @@ public abstract class Conta implements IConta {
         return false;
     }
 
-    public void depositar(double valor) {
+    public void depositar(double valor) throws ValorDepositarInvalido {
+        if(valor <= 0) {
+            throw new ValorDepositarInvalido(valor);
+        }
         saldo += valor;
         extrato = extrato + "Credito: R$ " + valor + " Saldo: R$ " + getSaldo() + "\n";
     }
 
-    public void transferir(double valor, IConta contaDestino) throws SaldoInsuficiente {
+    public void transferir(double valor, IConta contaDestino) throws SaldoInsuficiente, ValorDepositarInvalido {
         this.sacar(valor);
         contaDestino.depositar(valor);
     }

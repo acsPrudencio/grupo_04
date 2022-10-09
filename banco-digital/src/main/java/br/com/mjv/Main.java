@@ -4,10 +4,11 @@ import br.com.mjv.modelo.*;
 import br.com.mjv.modelo.validations.NaoEhPoupanca;
 import br.com.mjv.modelo.validations.SaldoInsuficiente;
 import br.com.mjv.modelo.validations.ContaInexistente;
+import br.com.mjv.modelo.validations.ValorDepositarInvalido;
 
 
 public class Main {
-    public static void main(String[] args) throws ContaInexistente, NaoEhPoupanca, SaldoInsuficiente {
+    public static void main(String[] args) throws ContaInexistente, NaoEhPoupanca, SaldoInsuficiente, ValorDepositarInvalido {
         Cliente Antonio = new Cliente("Antonio");
         Cliente Jose = new Cliente("Jose");
         Cliente Francisco = new Cliente("Francisco");

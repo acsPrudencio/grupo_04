@@ -5,6 +5,7 @@ import java.util.List;
 
 import br.com.mjv.modelo.validations.NaoEhPoupanca;
 import br.com.mjv.modelo.validations.SaldoInsuficiente;
+import br.com.mjv.modelo.validations.ValorDepositarInvalido;
 import lombok.Data;
 import br.com.mjv.modelo.validations.ContaInexistente;
 
@@ -36,7 +37,7 @@ public class Banco {
 
     }
 
-    public void deposito(Conta conta, double value) throws ContaInexistente {
+    public void deposito(Conta conta, double value) throws ContaInexistente, ValorDepositarInvalido {
 
         Conta c = null;
         c = pesquisarConta(conta);
@@ -70,7 +71,7 @@ public class Banco {
     }
 
     public void transferir(Conta contaOrigem, Conta contaDestino, double valor)
-            throws ContaInexistente, SaldoInsuficiente {
+            throws ContaInexistente, SaldoInsuficiente, ValorDepositarInvalido {
         Conta c1, c2 = null;
 
         c1 = pesquisarConta(contaOrigem);
