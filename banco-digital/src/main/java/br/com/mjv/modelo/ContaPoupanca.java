@@ -1,5 +1,6 @@
 package br.com.mjv.modelo;
 
+import br.com.mjv.modelo.validations.NaoEhPoupanca;
 import br.com.mjv.modelo.validations.ValorDepositarInvalido;
 
 public class ContaPoupanca extends Conta{
@@ -13,7 +14,7 @@ public class ContaPoupanca extends Conta{
         super.imprimirDadosDaConta();
     }
 
-    public void renderJuros(double taxa) throws ValorDepositarInvalido {
+    public void renderJuros(double taxa) throws ValorDepositarInvalido, NaoEhPoupanca {
         extrato += "Rendimento Juros R$ "+ getSaldo() * (taxa/100) +" \n";
         depositar(getSaldo() * (taxa/100));
     }

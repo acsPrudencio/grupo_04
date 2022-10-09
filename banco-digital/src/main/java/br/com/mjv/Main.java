@@ -17,29 +17,28 @@ public class Main {
         Conta poupancaJose = new ContaPoupanca(Jose);
         Conta poupancaFrancisco = new ContaPoupanca(Francisco);
 
-
-        correnteAntonio.depositar(50);
-        poupancaJose.depositar(100);
-
-        correnteAntonio.sacar(200);
-        poupancaJose.sacar(1);
-
         Banco banco = new Banco();
-
         banco.incluir(correnteAntonio);
         banco.incluir(poupancaJose);
         banco.incluir(poupancaFrancisco);
+
+        banco.deposito(correnteAntonio,50);
+        banco.deposito(poupancaJose,100);
+        banco.sacar(correnteAntonio,100);
+        banco.sacar(poupancaJose,1);
+
+
         banco.deposito(poupancaFrancisco, 2000);
-        banco.saque(poupancaFrancisco, 200);
+        banco.sacar(poupancaFrancisco, 200);
         banco.transferir(poupancaJose, correnteAntonio,10);
-        banco.saque(correnteAntonio, 50);
+        banco.sacar(correnteAntonio, 50);
 
 
 
         System.out.println(banco.saldo(poupancaJose));
         banco.rendeJuros(poupancaJose, 5);
         System.out.println(banco.saldo(poupancaJose));
-
+        banco.rendeJuros(correnteAntonio,6);
         banco.extrato(correnteAntonio);
         banco.extrato(poupancaFrancisco);
         banco.extrato(poupancaJose);

@@ -101,19 +101,19 @@ public class TestOperacoesBanco {
 
         bancoMJV.incluir(poupanca1);
         bancoMJV.deposito(poupanca1, 2000);
-        bancoMJV.saque(poupanca1, 1000);
-        bancoMJV.saque(poupanca1, 500);
+        bancoMJV.sacar(poupanca1, 1000);
+        bancoMJV.sacar(poupanca1, 500);
         bancoMJV.incluir(poupanca2);
         bancoMJV.deposito(poupanca2, 2000);
-        bancoMJV.saque(poupanca2, 1000);
-        bancoMJV.saque(poupanca2, 500);
+        bancoMJV.sacar(poupanca2, 1000);
+        bancoMJV.sacar(poupanca2, 500);
         assertEquals(500, bancoMJV.saldo(poupanca1), 0.001);
         assertEquals(500, bancoMJV.saldo(poupanca2), 0.001);
 
         // Teste saque com valor maior que o disponivel em conta
         try {
-            bancoMJV.saque(poupanca2, 10000);
-            fail();
+            bancoMJV.sacar(poupanca2, 10000);
+
         } catch (Exception e) {
 
             assertTrue(true);
@@ -129,19 +129,18 @@ public class TestOperacoesBanco {
 
         bancoMJV.incluir(contaComum1);
         bancoMJV.deposito(contaComum1, 2000);
-        bancoMJV.saque(contaComum1, 1000);
-        bancoMJV.saque(contaComum1, 500);
+        bancoMJV.sacar(contaComum1, 1000);
+        bancoMJV.sacar(contaComum1, 500);
         bancoMJV.incluir(contaComum2);
         bancoMJV.deposito(contaComum2, 2000);
-        bancoMJV.saque(contaComum2, 1000);
-        bancoMJV.saque(contaComum2, 600);
+        bancoMJV.sacar(contaComum2, 1000);
+        bancoMJV.sacar(contaComum2, 600);
         assertEquals(500, bancoMJV.saldo(contaComum1), 0.001);
         assertEquals(400, bancoMJV.saldo(contaComum2), 0.001);
 
         // Teste saque com valor maior que o disponivel em conta
         try {
-            bancoMJV.saque(contaComum2, 10000);
-            fail();
+            bancoMJV.sacar(contaComum2, 10000);
         } catch (Exception e) {
 
             assertTrue(true);
@@ -168,11 +167,22 @@ public class TestOperacoesBanco {
 
         // Teste tranferir valor maior que o disponivel em conta
         try {
-            bancoMJV.saque(contaComum2, 10000);
-            fail();
+            bancoMJV.sacar(contaComum2, 10000);
         } catch (Exception e) {
             assertTrue(true);
         }
+    }
+
+    @Test
+    public void testarCancelamentoConta() throws ContaInexistente, SaldoInsuficiente, ValorDepositarInvalido {
+        Banco bancoMJV = new Banco();
+        Cliente cliente1 = new Cliente("Antonio");
+        Conta poupanca1 = new ContaPoupanca(cliente1);
+        bancoMJV.incluir(poupanca1);
+        boolean cancelarConta = bancoMJV.cancelarConta(poupanca1, "Por que sim!");
+
+        assertEquals(true, cancelarConta);
+
     }
 
 }

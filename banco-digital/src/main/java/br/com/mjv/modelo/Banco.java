@@ -30,7 +30,7 @@ public class Banco {
         return c.getSaldo();
     }
 
-    public void saque(Conta conta, double value) throws ContaInexistente, SaldoInsuficiente {
+    public void sacar(Conta conta, double value) throws ContaInexistente, SaldoInsuficiente {
         Conta c = null;
         c = pesquisarConta(conta);
         c.sacar(value);
@@ -59,9 +59,14 @@ public class Banco {
         c = pesquisarConta(conta);
 
         try {
+            if (c.getClass().getSimpleName() == ContaCorrente.class.getSimpleName()){
+                throw new NaoEhPoupanca(c);
+            }
             ((ContaPoupanca) c).renderJuros(t);
-        } catch (Exception e) {
-            throw new NaoEhPoupanca(conta.getNumero());
+        } catch (NaoEhPoupanca e) {
+            System.out.println(e);
+        } catch (ValorDepositarInvalido e) {
+            System.out.println(e.toString());
         }
     }
 
@@ -79,5 +84,13 @@ public class Banco {
         c2 = pesquisarConta(contaDestino);
         c2.depositar(valor);
 
+    }
+
+    public boolean cancelarConta(Conta conta,String justificativa){
+        if (!(justificativa.isEmpty() || justificativa.isBlank())){
+            conta.statusConta = false;
+            return true;
+        }
+        return false;
     }
 }

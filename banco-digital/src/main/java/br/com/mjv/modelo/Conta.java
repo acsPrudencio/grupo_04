@@ -26,7 +26,7 @@ public abstract class Conta implements IConta {
     public void sacar(double valor) throws SaldoInsuficiente {
         try {
             if (valor > getSaldo()) {
-                throw new SaldoInsuficiente(numero, getSaldo());
+                throw new SaldoInsuficiente(this, valor);
             }
             saldo -= valor;
             extrato = extrato + "Debito: R$ " + valor + " Saldo: R$ " + getSaldo() + "\n";
@@ -36,13 +36,6 @@ public abstract class Conta implements IConta {
         }
     }
 
-    public boolean cancelarConta(String justificativa){
-        if (justificativa.isEmpty() || justificativa.isBlank()){
-            this.statusConta = false;
-            return true;
-        }
-        return false;
-    }
 
     public void depositar(double valor) throws ValorDepositarInvalido {
         try {

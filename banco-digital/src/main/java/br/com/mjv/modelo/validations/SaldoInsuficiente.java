@@ -1,19 +1,21 @@
 package br.com.mjv.modelo.validations;
 
+import br.com.mjv.modelo.Conta;
+
 public class SaldoInsuficiente extends Exception {
 
     private static final long serialVersionUID = 1L;
-    private int conta ;
-    private double saldo ;
-    public SaldoInsuficiente(int conta, double saldo) {
+    private Conta conta ;
+    private double valor ;
+    public SaldoInsuficiente(Conta conta, double valor) {
         super();
         this.conta = conta;
-        this.saldo = saldo;
+        this.valor = valor;
     }
     @Override
     public String toString() {
-        return "A conta de número " + this.conta +
-                " não possui saldo para a operação. "
-                + "Saldo atual: " +this.saldo;
+        return conta.getCliente().getNome() + " o saque no valor de: " + this.valor +
+                " não foi realizado, pois o saldo é insuficiente. \n"
+                + "Saldo atual: " + this.conta.getSaldo();
     }
 }
