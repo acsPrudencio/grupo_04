@@ -32,7 +32,7 @@ public abstract class Conta implements IConta {
             extrato = extrato + "Debito: R$ " + valor + " Saldo: R$ " + getSaldo() + "\n";
 
         } catch (SaldoInsuficiente e) {
-            new SaldoInsuficiente(numero, getSaldo());
+            System.out.println(e);
         }
     }
 
