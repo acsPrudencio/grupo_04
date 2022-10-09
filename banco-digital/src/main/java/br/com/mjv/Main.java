@@ -1,14 +1,13 @@
 package br.com.mjv;
 
 import br.com.mjv.modelo.*;
-import br.com.mjv.modelo.validations.NaoEhPoupanca;
-import br.com.mjv.modelo.validations.SaldoInsuficiente;
-import br.com.mjv.modelo.validations.ContaInexistente;
-import br.com.mjv.modelo.validations.ValorDepositarInvalido;
+import br.com.mjv.modelo.validations.*;
+
+import java.time.LocalDate;
 
 
 public class Main {
-    public static void main(String[] args) throws ContaInexistente, NaoEhPoupanca, SaldoInsuficiente, ValorDepositarInvalido {
+    public static void main(String[] args) throws ContaInexistente, NaoEhPoupanca, SaldoInsuficiente, ValorDepositarInvalido, DataInvalida {
         Cliente Antonio = new Cliente("Antonio");
         Cliente Jose = new Cliente("Jose");
         Cliente Francisco = new Cliente("Francisco");
@@ -39,10 +38,13 @@ public class Main {
         banco.rendeJuros(poupancaJose, 5);
         System.out.println(banco.saldo(poupancaJose));
         banco.rendeJuros(correnteAntonio,6);
-        banco.extrato(correnteAntonio);
-        banco.extrato(poupancaFrancisco);
-        banco.extrato(poupancaJose);
+        String extratopoupancaFrancisco = banco.consultarExtrato(poupancaFrancisco, LocalDate.now(), LocalDate.now().plusDays(-1));
+        String extratopoupancaJose = banco.consultarExtrato(poupancaJose, LocalDate.now(), LocalDate.now());
+        String extratoCorrenteAntonio = banco.consultarExtrato(correnteAntonio, LocalDate.now(), LocalDate.now().plusDays(-1));
 
+        System.out.println(extratoCorrenteAntonio);
+        System.out.println(extratopoupancaJose);
+        System.out.println(extratopoupancaFrancisco);
 
     }
 }

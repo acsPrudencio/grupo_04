@@ -15,7 +15,7 @@ public class ContaPoupanca extends Conta{
     }
 
     public void renderJuros(double taxa) throws ValorDepositarInvalido, NaoEhPoupanca {
-        extrato += "Rendimento Juros R$ "+ getSaldo() * (taxa/100) +" \n";
+        adicionarAoExtrato("Rendimento Juros R$ "+ getSaldo() * (taxa/100) +" \n");
         depositar(getSaldo() * (taxa/100));
     }
 }

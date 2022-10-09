@@ -5,6 +5,11 @@ import br.com.mjv.modelo.validations.SaldoInsuficiente;
 import br.com.mjv.modelo.validations.ValorDepositarInvalido;
 import lombok.Data;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+
 @Data
 public abstract class Conta implements IConta {
     private static final int AGENCIA_PADRAO = 1;
@@ -13,7 +18,7 @@ public abstract class Conta implements IConta {
     protected int numero;
     protected double saldo;
     protected Cliente cliente;
-    protected String extrato = "";
+    protected List<Extrato> extrato;
     protected boolean statusConta;
 
     public Conta(Cliente cliente) {
@@ -29,7 +34,7 @@ public abstract class Conta implements IConta {
                 throw new SaldoInsuficiente(this, valor);
             }
             saldo -= valor;
-            extrato = extrato + "Debito: R$ " + valor + " Saldo: R$ " + getSaldo() + "\n";
+            adicionarAoExtrato("Debito: R$ " + valor + " Saldo: R$ " + getSaldo() + "\n");
 
         } catch (SaldoInsuficiente e) {
             System.out.println(e);
@@ -43,7 +48,7 @@ public abstract class Conta implements IConta {
                 throw new ValorDepositarInvalido();
             }
             saldo += valor;
-            extrato = extrato + "Credito: R$ " + valor + " Saldo: R$ " + getSaldo() + "\n";
+            adicionarAoExtrato("Credito: R$ " + valor + " Saldo: R$ " + getSaldo() + "\n");
         }catch (ValorDepositarInvalido e){
             System.out.println(e);
 
@@ -69,4 +74,26 @@ public abstract class Conta implements IConta {
             System.out.println(extrato);
         }
     }
+
+    protected void adicionarAoExtrato(String movimentacao) {
+        if (extrato == null){
+            extrato = new ArrayList<>();
+        }
+        extrato.add(new Extrato(movimentacao, LocalDateTime.now()));
+    }
+
+    protected String consultarExtrato(LocalDate ld1, LocalDate ld2){
+        String extr = "Cliente: " + this.cliente.getNome() +
+                        "\nAgencia: " + this.getAgencia() +
+                        ", Conta: " + this.getNumero() +
+                        "\n";
+        for (Extrato e: extrato){
+            if((e.getData().toLocalDate().isAfter(ld1) || e.getData().toLocalDate().isEqual(ld1))
+                    && (e.getData().toLocalDate().isBefore(ld2) || e.getData().toLocalDate().isEqual(ld2))){
+                extr += e.getExtrato();
+            }
+        }
+        return extr;
+    }
+
 }
