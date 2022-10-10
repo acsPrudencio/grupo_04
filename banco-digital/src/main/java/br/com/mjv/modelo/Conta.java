@@ -43,16 +43,13 @@ public abstract class Conta implements IConta {
 
 
     public void depositar(double valor) throws ValorDepositarInvalido {
-        try {
+
             if (valor <= 0) {
                 throw new ValorDepositarInvalido();
             }
             saldo += valor;
             adicionarAoExtrato("Credito: R$ " + valor + " Saldo: R$ " + getSaldo() + "\n");
-        }catch (ValorDepositarInvalido e){
-            System.out.println(e);
 
-        }
     }
 
     public void transferir(double valor, IConta contaDestino) throws SaldoInsuficiente, ValorDepositarInvalido {
