@@ -1,6 +1,7 @@
 import br.com.mjv.modelo.*;
 import br.com.mjv.modelo.validations.ContaInexistente;
 import br.com.mjv.modelo.validations.SaldoInsuficiente;
+import br.com.mjv.modelo.validations.ValorDepositarInvalido;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -54,7 +55,7 @@ public class TestOperacoesBanco {
 
 
     @Test
-    public void testarDepositoDeContaPoupanca() throws ContaInexistente {
+    public void testarDepositoDeContaPoupanca() throws ContaInexistente, ValorDepositarInvalido {
         Banco bancoMJV = new Banco();
         Cliente cliente1 = new Cliente("Antonio");
         Conta poupanca1 = new ContaCorrente(cliente1);
@@ -73,7 +74,7 @@ public class TestOperacoesBanco {
     }
 
     @Test
-    public void testarDepositoDeContaComum() throws ContaInexistente {
+    public void testarDepositoDeContaComum() throws ContaInexistente, ValorDepositarInvalido {
         Banco bancoMJV = new Banco();
         Cliente cliente1 = new Cliente("Antonio");
         Conta contaComum1 = new ContaCorrente(cliente1);
@@ -92,7 +93,7 @@ public class TestOperacoesBanco {
     }
 
     @Test
-    public void testarSaqueDeContaPoupanca() throws ContaInexistente, SaldoInsuficiente {
+    public void testarSaqueDeContaPoupanca() throws ContaInexistente, SaldoInsuficiente, ValorDepositarInvalido {
         Banco bancoMJV = new Banco();
         Cliente cliente1 = new Cliente("Antonio");
         Conta poupanca1 = new ContaCorrente(cliente1);
@@ -120,7 +121,7 @@ public class TestOperacoesBanco {
     }
 
     @Test
-    public void testarSaqueDeContaComum() throws ContaInexistente, SaldoInsuficiente {
+    public void testarSaqueDeContaComum() throws ContaInexistente, SaldoInsuficiente, ValorDepositarInvalido {
         Banco bancoMJV = new Banco();
         Cliente cliente1 = new Cliente("Antonio");
         Conta contaComum1 = new ContaCorrente(cliente1);
@@ -148,7 +149,7 @@ public class TestOperacoesBanco {
     }
 
     @Test
-    public void testarTranferencia() throws ContaInexistente, SaldoInsuficiente {
+    public void testarTranferencia() throws ContaInexistente, SaldoInsuficiente, ValorDepositarInvalido {
         Banco bancoMJV = new Banco();
         Cliente cliente1 = new Cliente("Antonio");
         Conta poupanca1 = new ContaPoupanca(cliente1);
