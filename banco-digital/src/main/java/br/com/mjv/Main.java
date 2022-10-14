@@ -24,6 +24,7 @@ public class Main {
         banco.deposito(correnteAntonio,50);
         banco.deposito(poupancaJose,100);
         banco.sacar(correnteAntonio,100);
+
         banco.sacar(poupancaJose,1);
 
 
@@ -34,9 +35,7 @@ public class Main {
 
 
 
-        System.out.println(banco.saldo(poupancaJose));
         banco.rendeJuros(poupancaJose, 5);
-        System.out.println(banco.saldo(poupancaJose));
         banco.rendeJuros(correnteAntonio,6);
         String extratopoupancaFrancisco = banco.consultarExtrato(poupancaFrancisco, LocalDate.now(), LocalDate.now().plusDays(-1));
         String extratopoupancaJose = banco.consultarExtrato(poupancaJose, LocalDate.now(), LocalDate.now());

@@ -6,9 +6,10 @@ import java.util.List;
 
 import br.com.mjv.modelo.validations.*;
 import lombok.Data;
+import lombok.Getter;
 
 
-@Data
+@Getter
 public class Banco {
 
     private String nome;

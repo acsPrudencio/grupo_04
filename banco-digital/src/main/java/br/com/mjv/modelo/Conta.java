@@ -4,14 +4,15 @@ import br.com.mjv.interfaces.IConta;
 import br.com.mjv.modelo.validations.SaldoInsuficiente;
 import br.com.mjv.modelo.validations.ValorDepositarInvalido;
 import lombok.Data;
+import lombok.Getter;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-@Data
-public abstract class Conta implements IConta {
+@Getter
+public class Conta implements IConta {
     private static final int AGENCIA_PADRAO = 1;
     private static int SEQUENCIAL = 1;
     protected int agencia;
@@ -57,19 +58,17 @@ public abstract class Conta implements IConta {
         contaDestino.depositar(valor);
     }
 
-    public abstract void imprimirExtrato();
+    @Override
+    public void imprimirExtrato() {
+
+    }
+
 
     protected void imprimirDadosDaConta() {
         System.out.println(String.format("Titular: %s", this.cliente.getNome()));
         System.out.println(String.format("Agencia: %d", this.agencia));
         System.out.println(String.format("Numero: %d", this.numero));
-        System.out.println("Movimentacao:");
-
-        if (extrato.isEmpty()) {
-            System.out.println("Saldo: R$ " + this.getSaldo());
-        } else {
-            System.out.println(extrato);
-        }
+        System.out.println("Saldo: R$ " + this.getSaldo());
     }
 
     protected void adicionarAoExtrato(String movimentacao) {
