@@ -17,5 +17,6 @@ public class Main {
         cc.setDataHora(LocalDateTime.now());
         cc.setServico(Servico.AGUA);
         System.out.println(cc.exibir());
+        EntradaSaida.CarregarArquivo();
     }
 }
