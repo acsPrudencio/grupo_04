@@ -27,6 +27,7 @@ public class Contrato {
         this.hora = agora.getHour() + ":" + agora.getMinute();
         this.tipoServico = tipoServico;
         this.valor = valor;
+        this.pessoa = pessoa;
     }
     private String gerarNumeroProtocolo(LocalDateTime agora){
         Random numAleatorio = new Random(19700621);
@@ -59,5 +60,9 @@ public class Contrato {
 
     public void setTipoNotificao(TipoNotificaoEnum tipoNotificao) {
         this.tipoNotificao = tipoNotificao;
+    }
+
+    public Pessoa getPessoa() {
+        return pessoa;
     }
 }
