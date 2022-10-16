@@ -1,4 +1,4 @@
-package br.com.mjv;
+package br.com.mjv.dominio.model;
 
 public class Endereco {
     private String numero;
