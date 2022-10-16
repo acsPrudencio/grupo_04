@@ -10,6 +10,7 @@ import br.com.mjv.dominio.model.Pessoa;
 
 import java.io.*;
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Random;
 
 public class Cadastrar {
@@ -54,16 +55,17 @@ public class Cadastrar {
         stringBuilder.append(pessoa.getEndereco().getCep());
         stringBuilder.append(pessoa.getEndereco().getPais());
         stringBuilder.append(contrato.getProtocolo());
-        stringBuilder.append(contrato.getDataAgendamento());
+        stringBuilder.append(contrato.getDataAgendamento().toString().replace("-","/"));
         stringBuilder.append(contrato.getHora());
         stringBuilder.append(contrato.getTipoServico());
-        stringBuilder.append(contrato.getValor());
+        stringBuilder.append(contrato.getValor().setScale(2, RoundingMode.HALF_EVEN));
         stringBuilder.append(contrato.getTipoNotificao());
 
-        gravarNoArquivo(stringBuilder.toString());
+        String retornoDaGravacao = gravarNoArquivo(stringBuilder.toString());
+        System.out.println(retornoDaGravacao);
 
     }
-    public static void gravarNoArquivo(String conteudo) throws IOException {
+    public static String gravarNoArquivo(String conteudo) throws IOException {
         OutputStream os = new FileOutputStream("agua-luz-contratos.txt"); // nome do arquivo que será escrito
         Writer wr = new OutputStreamWriter(os);
         BufferedWriter br = new BufferedWriter(wr);
@@ -71,5 +73,6 @@ public class Cadastrar {
         br.write(conteudo);
         br.newLine();
         br.close();
+        return "As informações foram salvas no arquivo com sucesso!";
     }
 }
