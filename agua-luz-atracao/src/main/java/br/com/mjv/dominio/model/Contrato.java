@@ -1,5 +1,6 @@
 package br.com.mjv.dominio.model;
 
+import br.com.mjv.dominio.enums.TipoNotificaoEnum;
 import br.com.mjv.dominio.enums.TipoServicoEnum;
 
 import java.math.BigDecimal;
@@ -15,8 +16,11 @@ public class Contrato {
     private String hora;
     private TipoServicoEnum tipoServico;
     private BigDecimal valor;
+    private TipoNotificaoEnum tipoNotificao;
 
-    public Contrato(TipoServicoEnum tipoServico, BigDecimal valor) {
+    private Pessoa pessoa;
+
+    public Contrato(TipoServicoEnum tipoServico, BigDecimal valor, Pessoa pessoa) {
         LocalDateTime agora = LocalDateTime.now();
         this.protocolo = gerarNumeroProtocolo(agora);
         this.dataAgendamento = LocalDate.from(agora);
@@ -47,5 +51,13 @@ public class Contrato {
 
     public BigDecimal getValor() {
         return valor;
+    }
+
+    public TipoNotificaoEnum getTipoNotificao() {
+        return tipoNotificao;
+    }
+
+    public void setTipoNotificao(TipoNotificaoEnum tipoNotificao) {
+        this.tipoNotificao = tipoNotificao;
     }
 }

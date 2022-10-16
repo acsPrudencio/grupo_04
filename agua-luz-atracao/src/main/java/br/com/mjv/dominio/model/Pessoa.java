@@ -8,7 +8,7 @@ public class Pessoa {
 
     private Endereco endereco;
 
-    public Pessoa(String cpf, String rg, String nome){
+    public Pessoa(String cpf, String rg, String nome, Endereco endereco){
         this.cpf = cpf;
         this.rg = rg;
         this.nome = nome;
