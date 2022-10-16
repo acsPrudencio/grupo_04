@@ -1,25 +1,25 @@
 package br.com.mjv.dominio.model;
 
+import br.com.mjv.dominio.enums.PaisEnum;
+import br.com.mjv.dominio.enums.UfEnum;
+
 public class Endereco {
     private String numero;
     private String complemento;
     private String bairro;
     private String cidade;
     private String cep;
-    private String pais;
+    private PaisEnum pais;
+    private UfEnum UF;
+    private String logradouro;
 
-    public enum UF {
-        RO("Rondônia"), AC("Acre"), AM("Amazonas"), RR("Roraima"), PA("Pará"), AP("Amapá"), TO("Tocantins"),
-        MA("Maranhão"), PI("Piauí"), CE("Ceará"), RN("Rio Grande do Norte"), PB("Paraíba"), PE("Pernambuco"),
-        AL("Alagoas"), SE("Sergipe"), BA("Bahia"), MG("Minas Gerais"), ES("Espírito Santo"), RJ("Rio de Janeiro"),
-        SP("São Paulo"), PR("Paraná"), SC("Santa Catarina"), RS("Rio Grande do Sul"), MS("Mato Grosso do Sul"),
-        MT("Mato Grosso"), GO("Goiânia"), DF("Distrito Federal");
 
-        private String descricao;
+    public UfEnum getUF() {
+        return UF;
+    }
 
-        UF(String descricao) {
-            this.descricao = descricao;
-        }
+    public void setUF(UfEnum UF) {
+        this.UF = UF;
     }
 
     public String getNumero() {
@@ -62,11 +62,19 @@ public class Endereco {
         this.cep = cep;
     }
 
-    public String getPais() {
+    public PaisEnum getPais() {
         return pais;
     }
 
-    public void setPais(String pais) {
+    public void setPais(PaisEnum pais) {
         this.pais = pais;
+    }
+
+    public String getLogradouro() {
+        return logradouro;
+    }
+
+    public void setLogradouro(String logradouro) {
+        this.logradouro = logradouro;
     }
 }
