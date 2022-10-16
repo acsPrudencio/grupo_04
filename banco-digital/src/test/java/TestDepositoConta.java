@@ -13,9 +13,20 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 public class TestDepositoConta {
-    @DisplayName("Realizar deposito ")
+    @DisplayName("Realizar deposito - Valor esperado incorreto ")
     @Test
-    void testRealizarDeposito() throws ContaInexistente, ValorDepositarInvalido {
+    void testRealizarDepositoErro() throws ContaInexistente, ValorDepositarInvalido {
+        Cliente Lucilaneo = new Cliente("Lucilaneo");
+        ContaCorrente cc = new ContaCorrente(Lucilaneo);
+        Banco banco = new Banco();
+        banco.incluir(cc);
+        banco.deposito(cc,100);
+        assertEquals(0, banco.saldo(cc), 0.001);
+    }
+
+    @DisplayName("Realizar deposito - Saque com sucesso ")
+    @Test
+    void testRealizarDepositoSucesso() throws ContaInexistente, ValorDepositarInvalido {
         Cliente Lucilaneo = new Cliente("Lucilaneo");
         ContaCorrente cc = new ContaCorrente(Lucilaneo);
         Banco banco = new Banco();
@@ -23,7 +34,6 @@ public class TestDepositoConta {
         banco.deposito(cc,100);
         assertEquals(100, banco.saldo(cc), 0.001);
     }
-
     @DisplayName("ValorDepositarInvalido - Deposito Negativo ")
     @Test
     void testValorDepositarValorNegativo() throws ContaInexistente {
@@ -49,6 +59,21 @@ public class TestDepositoConta {
         banco.incluir(cc);
         ValorDepositarInvalido retorno = Assertions.assertThrows(ValorDepositarInvalido.class, () ->{
             banco.deposito(cc,0);
+        }, "Esperado exceção ValorDepositarInvalido");
+        Assertions.assertEquals("O valor de depósito deve ser superior a zero.", retorno.toString());
+
+
+    }
+    @DisplayName("ValorDepositarInvalido - Deposito entrada com sucesso")
+    @Test
+    void testValorDepositarSucesso() throws ContaInexistente {
+
+        Cliente Lucilaneo = new Cliente("Lucilaneo");
+        ContaCorrente cc = new ContaCorrente(Lucilaneo);
+        Banco banco = new Banco();
+        banco.incluir(cc);
+        ValorDepositarInvalido retorno = Assertions.assertThrows(ValorDepositarInvalido.class, () ->{
+            banco.deposito(cc,100);
         }, "Esperado exceção ValorDepositarInvalido");
         Assertions.assertEquals("O valor de depósito deve ser superior a zero.", retorno.toString());
 
