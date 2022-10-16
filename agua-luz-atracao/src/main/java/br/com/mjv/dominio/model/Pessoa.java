@@ -23,10 +23,6 @@ public class Pessoa {
         return endereco;
     }
 
-    public void setEndereco(Endereco endereco) {
-        this.endereco = endereco;
-    }
-
     public String getCpf() {
         return cpf;
     }

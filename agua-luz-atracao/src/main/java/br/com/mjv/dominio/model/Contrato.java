@@ -9,6 +9,8 @@ import java.time.LocalDateTime;
 import java.util.Random;
 import java.util.random.RandomGenerator;
 
+import static java.time.format.DateTimeFormatter.ofPattern;
+
 public class Contrato {
 
     private String protocolo;
@@ -24,14 +26,15 @@ public class Contrato {
         LocalDateTime agora = LocalDateTime.now();
         this.protocolo = gerarNumeroProtocolo(agora);
         this.dataAgendamento = LocalDate.from(agora);
-        this.hora = agora.getHour() + ":" + agora.getMinute();
+        this.hora = agora.format(ofPattern("HH:mm"));
         this.tipoServico = tipoServico;
         this.valor = valor;
         this.pessoa = pessoa;
     }
     private String gerarNumeroProtocolo(LocalDateTime agora){
-        Random numAleatorio = new Random(19700621);
-        return LocalDate.from(agora).toString() + numAleatorio.nextInt();
+        Random numAleatorio = new Random();
+//        return LocalDate.from(agora).toString() + numAleatorio.nextInt();
+        return Integer.toString(numAleatorio.nextInt(9999999));
     }
 
     public String getProtocolo() {
