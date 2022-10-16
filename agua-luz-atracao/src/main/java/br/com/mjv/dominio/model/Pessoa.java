@@ -12,6 +12,7 @@ public class Pessoa {
         this.cpf = cpf;
         this.rg = rg;
         this.nome = nome;
+        this.endereco = endereco;
     }
 
     public void setNumeroCelular(String numero){
@@ -24,5 +25,21 @@ public class Pessoa {
 
     public void setEndereco(Endereco endereco) {
         this.endereco = endereco;
+    }
+
+    public String getCpf() {
+        return cpf;
+    }
+
+    public String getRg() {
+        return rg;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public String getCelular() {
+        return celular;
     }
 }

@@ -13,7 +13,7 @@ import java.math.BigDecimal;
 import java.util.Random;
 
 public class Cadastrar {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
 
         Endereco endereco = new Endereco();
         endereco.setLogradouro("Rua Sebastião Firmino");
@@ -39,10 +39,16 @@ public class Cadastrar {
             contrato.setTipoNotificao(TipoNotificaoEnum.WHATS);
         }
 
+        StringBuilder stringBuilder = new StringBuilder();
 
+        stringBuilder.append(contrato.getPessoa().getCpf());
+        stringBuilder.append(contrato.getPessoa().getRg());
+        stringBuilder.append(contrato.getPessoa().getNome());
+
+        gravarNoArquivo(stringBuilder.toString());
 
     }
-    public void gravarNoArquivo(String conteudo) throws IOException {
+    public static void gravarNoArquivo(String conteudo) throws IOException {
         OutputStream os = new FileOutputStream("agua-luz-contratos.txt"); // nome do arquivo que será escrito
         Writer wr = new OutputStreamWriter(os);
         BufferedWriter br = new BufferedWriter(wr);
