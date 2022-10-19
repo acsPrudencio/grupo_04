@@ -35,7 +35,7 @@ public class Conta implements IConta {
                 throw new SaldoInsuficiente(this, valor);
             }
             saldo -= valor;
-            adicionarAoExtrato("Debito: R$ " + valor + " Saldo: R$ " + getSaldo() + "\n");
+            adicionarAoExtrato("Debito: R$ " + valor + " Saldo: R$ " + this.getSaldo() + "\n");
 
         } catch (SaldoInsuficiente e) {
             System.out.println(e);

@@ -35,7 +35,7 @@ public class Pessoa {
         return nome;
     }
 
-    public String getCelular() {
+    public String getNumeroCelular() {
         return celular;
     }
 }

@@ -45,7 +45,7 @@ public class Cadastrar {
         stringBuilder.append(contrato.getPessoa().getCpf());
         stringBuilder.append(contrato.getPessoa().getRg());
         stringBuilder.append(contrato.getPessoa().getNome());
-        stringBuilder.append(contrato.getPessoa().getCelular());
+        stringBuilder.append(contrato.getPessoa().getNumeroCelular());
         stringBuilder.append(pessoa.getEndereco().getLogradouro());
         stringBuilder.append(pessoa.getEndereco().getNumero());
         stringBuilder.append(pessoa.getEndereco().getComplemento());
