@@ -1,4 +1,4 @@
-package br.com.mjv;
+package br.com.mjv.dominio.model;
 
 import br.com.mjv.dominio.enums.PaisEnum;
 import br.com.mjv.dominio.enums.UfEnum;

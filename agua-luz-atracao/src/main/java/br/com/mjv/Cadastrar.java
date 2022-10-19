@@ -40,26 +40,26 @@ public class Cadastrar {
             contrato.setTipoNotificao(TipoNotificaoEnum.WHATS);
         }
 
-        StringBuilder stringBuilder = new StringBuilder();
 
-        stringBuilder.append(contrato.getPessoa().getCpf());
-        stringBuilder.append(contrato.getPessoa().getRg());
-        stringBuilder.append(contrato.getPessoa().getNome());
-        stringBuilder.append(contrato.getPessoa().getCelular());
-        stringBuilder.append(pessoa.getEndereco().getLogradouro());
-        stringBuilder.append(pessoa.getEndereco().getNumero());
-        stringBuilder.append(pessoa.getEndereco().getComplemento());
-        stringBuilder.append(pessoa.getEndereco().getBairro());
-        stringBuilder.append(pessoa.getEndereco().getCidade());
-        stringBuilder.append(pessoa.getEndereco().getUF());
-        stringBuilder.append(pessoa.getEndereco().getCep());
-        stringBuilder.append(pessoa.getEndereco().getPais());
-        stringBuilder.append(contrato.getProtocolo());
-        stringBuilder.append(contrato.getDataAgendamento().toString().replace("-","/"));
-        stringBuilder.append(contrato.getHora());
-        stringBuilder.append(contrato.getTipoServico());
-        stringBuilder.append(contrato.getValor().setScale(2, RoundingMode.HALF_EVEN));
-        stringBuilder.append(contrato.getTipoNotificao());
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append(normalizarNumeros(contrato.getPessoa().getCpf(),11));
+        stringBuilder.append(normalizarNumeros(contrato.getPessoa().getRg(),10));
+        stringBuilder.append(normalizarNomes(contrato.getPessoa().getNome(), 30));
+        stringBuilder.append(normalizarNumeros(contrato.getPessoa().getCelular(),11));
+        stringBuilder.append(normalizarNomes(pessoa.getEndereco().getLogradouro(),20));
+        stringBuilder.append(normalizarNumeros(pessoa.getEndereco().getNumero(),6));
+        stringBuilder.append(normalizarNomes(pessoa.getEndereco().getComplemento(),10));
+        stringBuilder.append(normalizarNomes(pessoa.getEndereco().getBairro(),15));
+        stringBuilder.append(normalizarNomes(pessoa.getEndereco().getCidade(),30));
+        stringBuilder.append(normalizarNomes(pessoa.getEndereco().getUF(),2));
+        stringBuilder.append(normalizarNomes(pessoa.getEndereco().getCep(),8));
+        stringBuilder.append(normalizarNomes(pessoa.getEndereco().getPais(),2));
+        stringBuilder.append(normalizarNumeros(contrato.getProtocolo(),10));
+        stringBuilder.append(normalizarNomes(contrato.getDataAgendamento().toString(),8));
+        stringBuilder.append(normalizarNomes(contrato.getHora(),4));
+        stringBuilder.append(normalizarNomes(contrato.getTipoServico(),1));
+        stringBuilder.append(normalizarNumeros(contrato.getValor().setScale(2, RoundingMode.HALF_EVEN).toString(),8));
+        stringBuilder.append(normalizarNomes(contrato.getTipoNotificao(),1));
 
         String retornoDaGravacao = gravarNoArquivo(stringBuilder.toString());
         System.out.println(retornoDaGravacao);
@@ -74,5 +74,23 @@ public class Cadastrar {
         br.newLine();
         br.close();
         return "As informações foram salvas no arquivo com sucesso!";
+    }
+    public static String normalizarNumeros(Object conteudo, int tamanho){
+        Long textoNormalizado = Long.parseLong(conteudo.toString().replace(".","").replace("(","").replace(")","").replace("-","").replace("/","").replace(",","").replace(" ",""));
+        return String.format("%0"+tamanho+"d",new Object[] { textoNormalizado });
+    }
+    public static String normalizarNomes(Object conteudo, int tamanho){
+        int tamConteudo = conteudo.toString().length();
+    String textoNormalizado = conteudo.toString().replace(":", "").replace("-", "").replace("/","").toUpperCase();
+        if (tamanho > tamConteudo){
+            textoNormalizado = textoNormalizado.substring(0,tamConteudo);
+            int qtdZero = tamConteudo - tamanho;
+            StringBuffer temp = new StringBuffer();
+            for (int i = 0; i<qtdZero; i++){
+                temp.append(" ");
+            }
+            return textoNormalizado + temp;
+        }
+        return textoNormalizado.substring(0,tamanho);
     }
 }
