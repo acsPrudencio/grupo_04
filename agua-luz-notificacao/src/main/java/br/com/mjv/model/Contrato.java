@@ -1,8 +1,5 @@
 package br.com.mjv.model;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.util.Random;
 
 /**
@@ -11,10 +8,19 @@ import java.util.Random;
  */
 public class Contrato {
 
-    private Integer numeroDoContrato = +1;
+    private Integer numeroDoContrato =1;
     private String date;
     private String hora;
     private Cliente cliente;
+    private String protocolo;
+
+    public String getProtocolo() {
+        return protocolo;
+    }
+
+    public void setProtocolo(String protocolo) {
+        this.protocolo = protocolo;
+    }
 
     public String getDate() {
         return date;
@@ -54,7 +60,7 @@ public class Contrato {
 
         Random rd = new Random();
       
-        rd.ints(0, 11);
+        rd.ints(999999999);
       
        return rd.nextInt();
        
