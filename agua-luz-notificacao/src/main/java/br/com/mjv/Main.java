@@ -35,7 +35,7 @@ public class Main {
         }
 
 
-        Contrato contrato = new Contrato(tipoServico, new BigDecimal(formatarValor(conteudoArquivo.substring(178,186))), removerZeroEsquerda(conteudoArquivo.substring(155,165)), conteudoArquivo.substring(165,173), formatarHora(conteudoArquivo.substring(173,177)),pessoa);
+        Contrato contrato = new Contrato(tipoServico, new BigDecimal(formatarValor(conteudoArquivo.substring(178,186))), removerZeroEsquerda(conteudoArquivo.substring(155,165)), formatarData(conteudoArquivo.substring(165,173)), formatarHora(conteudoArquivo.substring(173,177)),pessoa);
 
         TipoNotificaoEnum tipoNotificao;
         if (conteudoArquivo.substring(186,187).equalsIgnoreCase("S")){
@@ -50,6 +50,7 @@ public class Main {
                 + contrato.getCliente().getNome() + " cpf de número "
                 + contrato.getCliente().getCpf() + ", Informamos que conforme contrato com protocolo de número "
                 + contrato.getProtocolo() + " está agendado para a data\\hora "
+                + contrato.getDataAgendamento() + " "
                 + contrato.getHora() + "h a instalação do serviço de "
                 + contrato.getTipoServico() + " com taxa de valor R$ "
                 + contrato.getValor() + " em sua residência localizada no endereço abaixo:\n";
@@ -108,5 +109,12 @@ public class Main {
         StringBuffer stringBuffer = new StringBuffer(conteudo);
         stringBuffer.insert(stringBuffer.length()-2, ".");
         return stringBuffer.toString();
+    }
+    public static String formatarData(String conteudo){
+        String ano = conteudo.substring(0, 4);
+        String mes = conteudo.substring(4, 6);
+        String dia = conteudo.substring(6, 8);
+
+        return dia + "/" + mes + "/" + ano;
     }
 }
