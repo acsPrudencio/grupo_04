@@ -1,15 +1,11 @@
 package br.com.mjv.services;
 
-import br.com.mjv.model.Cliente;
-import br.com.mjv.model.Contrato;
-import br.com.mjv.model.Paises;
-import java.time.Instant;
-import java.time.LocalDate;
+import br.com.mjv.dominio.model.Cliente;
+import br.com.mjv.dominio.model.Contrato;
+
 import java.time.LocalDateTime;
-import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
-import java.util.Random;
 
 /**
  *
@@ -74,25 +70,23 @@ public class ContratoService {
         if (siglaDoPais.equalsIgnoreCase("bra") || siglaDoPais.equalsIgnoreCase("br")) {
 
             String hora = dataTime.toLocalTime().format(DateTimeFormatter.ofPattern("HH:mm:ss "));
-            String data = dataTime.toLocalDate().format(DateTimeFormatter.ofPattern("dd/MM/yyyy "));
-            
-            contrato.setDate(data);
+
             contrato.setHora(hora);
             
             total = ((this.agua + this.luz) + this.taxBrasileira);
             return " -------- Contrato de Serviço para o Pais " + cliente.siglaPais(siglaDoPais) + "\n Senhor(a) " + cliente.getNome()
                     + " CPF: " + cliente.getCpf()
                     + "\n Informamos que conforme contrato com protocolo  de numero " + contrato.gerarProtocolo()
-                    + "\n está agendado para a data " + contrato.getDate() + " hora " + contrato.getHora()
+                    + "\n está agendado para a data " + contrato.getDataAgendamento() + " hora " + contrato.getHora()
                     + "\n A instalação do serviço de Agua com a taxa de valor R$ " + this.getAgua()
                     + " Energia R$ " + this.getLuz()
                     + "\n Taxa de instalação R$ " + taxaDeSericoPorPais(siglaDoPais)
                     + "\n Gereando um valor total de R$ " + total
-                    + "\n em sua residencia localizada no endereço abaixo \n\n - Logradouro: " + cliente.getLogradouro()
-                    + "\n - Complemento: " + cliente.getComplemento()
-                    + "\n - Bairro: " + cliente.getBairro()
-                    + "\n - Cidade: " + cliente.getCidade()
-                    + "\n - Cep: " + cliente.getCep();
+                    + "\n em sua residencia localizada no endereço abaixo \n\n - Logradouro: " + cliente.getEndereco().getLogradouro()
+                    + "\n - Complemento: " + cliente.getEndereco().getComplemento()
+                    + "\n - Bairro: " + cliente.getEndereco().getBairro()
+                    + "\n - Cidade: " + cliente.getEndereco().getCidade()
+                    + "\n - Cep: " + cliente.getEndereco().getCep();
         } else {
             total = ((this.agua + this.luz) + this.taxExtrageira);
             return " -------- Contrato de Serviço para o Pais " + cliente.siglaPais(siglaDoPais) + "\n Mr(s) " + cliente.getNome()
@@ -103,11 +97,11 @@ public class ContratoService {
                     + "   Energy $ " + this.getLuz()
                     + "\n installation fee $ " + taxaDeSericoPorPais(siglaDoPais)
                     + "\n generatin total value $ " + total
-                    + "\n at your residence located at the address below\n\n - Public place: " + cliente.getLogradouro()
-                    + "\n - Complement: " + cliente.getComplemento()
-                    + "\n - Neighborhood: " + cliente.getBairro()
-                    + "\n - City: " + cliente.getCidade()
-                    + "\n - Zip code: " + cliente.getCep();
+                    + "\n at your residence located at the address below\n\n - Public place: " + cliente.getEndereco().getLogradouro()
+                    + "\n - Complement: " + cliente.getEndereco().getComplemento()
+                    + "\n - Neighborhood: " + cliente.getEndereco().getBairro()
+                    + "\n - City: " + cliente.getEndereco().getCidade()
+                    + "\n - Zip code: " + cliente.getEndereco().getCep();
         }
 
     }

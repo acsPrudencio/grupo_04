@@ -1,5 +1,5 @@
 
-package br.com.mjv.model;
+package br.com.mjv.dominio.model;
 
 /**
  *

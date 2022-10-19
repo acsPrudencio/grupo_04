@@ -81,10 +81,10 @@ public class Cadastrar {
     }
     public static String normalizarNomes(Object conteudo, int tamanho){
         int tamConteudo = conteudo.toString().length();
-    String textoNormalizado = conteudo.toString().replace(":", "").replace("-", "").replace("/","").toUpperCase();
+        String textoNormalizado = conteudo.toString().replace(":", "").replace("-", "").replace("/","").replace(".","").toUpperCase();
         if (tamanho > tamConteudo){
             textoNormalizado = textoNormalizado.substring(0,tamConteudo);
-            int qtdZero = tamConteudo - tamanho;
+            int qtdZero = tamanho - tamConteudo;
             StringBuffer temp = new StringBuffer();
             for (int i = 0; i<qtdZero; i++){
                 temp.append(" ");
